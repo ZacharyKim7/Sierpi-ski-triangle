@@ -1,2 +1,2 @@
-# Sierpi-ski-triangle
+# Sierpinski-triangle
 Sierpiński triangle fractal generator
