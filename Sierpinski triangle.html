@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<head>
+    <title>Sierpinski Triangle</title>
+</head>
+
+<body>
+    <h1>Sierpinski Triangle</h1>
+    <input id="pointnum" type="text" name="pointnum" placeholder="# of points"> 
+    <input type="button" value="start" onclick="plot()">
+    <input type="button" value="clear" onclick="clear()"><br><br>
+    <canvas id="canvas" width="500px" height="500px" style="border-style:solid;
+border-color:black; background-color:white">
+    </canvas>
+    <script type="text/javascript">
+        var draw = document.getElementById("canvas").getContext("2d");
+        draw.lineWidth = 5;
+        draw.strokeStyle = "black";
+        var vertex = [[250, 450 - 200 * Math.sqrt(3)], [50, 450], [450, 450]];
+        draw.beginPath();
+        draw.moveTo(vertex[0][0], vertex[0][1]);
+        draw.lineTo(vertex[1][0], vertex[1][1]);
+        draw.lineTo(vertex[2][0], vertex[2][1]);
+        draw.closePath()
+        draw.stroke();
+        function plot() {
+            var pointcount = document.getElementById("pointnum").value;
+            pointcount = parseInt(pointcount);
+            var currentlocation = [250, 450 - 200 * Math.sqrt(3) / 2.5]
+            draw.beginPath();
+            //draw.fillRect(currentlocation[0],currentlocation[1],1,1);
+            for (i = 1; i <= pointcount; i = i + 1) {
+                var polygon = [[250, 450 - 200 * Math.sqrt(3)], [50, 450], [450, 450]];
+                var nextvert = Math.floor(3 * Math.random());
+                currentlocation = [(currentlocation[0] + polygon[nextvert][0]) / 2,
+                (currentlocation[1] + polygon[nextvert][1]) / 2];
+                if (i < 5) { continue; }
+                draw.fillRect(currentlocation[0], currentlocation[1], 1, 1)
+            }
+            draw.stroke(); draw.fill();
+        }
+        function clear() {
+            const context = canvas.getContext('2d');
+            context.clearRect(0, 0, canvas.width, canvas.height);
+        }
+    </script>
+</body>
+</html>
